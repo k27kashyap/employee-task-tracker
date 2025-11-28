@@ -10,7 +10,9 @@ const errorHandler = require('./middleware/errorHandler');
 
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: process.env.FRONTEND_ORIGIN || '*' // set FRONTEND_ORIGIN in prod
+}));
 app.use(express.json());
 
 
@@ -56,3 +58,4 @@ next(err);
 
 app.use(errorHandler);
 app.listen(PORT, () => console.log(`Server running on ${PORT}`));
+app.get('/health', (req, res) => res.json({ ok: true, time: Date.now() }));
