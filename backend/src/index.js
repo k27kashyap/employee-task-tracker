@@ -4,7 +4,8 @@ const cors = require('cors');
 const connectDB = require('./config/db');
 const employeesRoute = require('./routes/employee');
 const tasksRoute = require('./routes/task');
-const authRoute = require('./routes/auth'); // optional
+const authRoute = require('./routes/auth');
+const dashboardRoute = require('./routes/dashboard');
 const errorHandler = require('./middleware/errorHandler');
 
 
@@ -21,7 +22,7 @@ connectDB(process.env.MONGO_URI || 'mongodb://localhost:27017/smarttracker');
 app.use('/api/employees', employeesRoute);
 app.use('/api/tasks', tasksRoute);
 app.use('/api/auth', authRoute);
-
+app.use('/api/dashboard', dashboardRoute);
 
 // simple dashboard endpoint
 app.get('/api/dashboard', async (req, res, next) => {
